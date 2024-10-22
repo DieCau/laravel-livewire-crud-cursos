@@ -1,3 +1,3 @@
 <div>
-    {{-- In work, do what you enjoy. --}}
+    <h1>Listado de Cursos</h1>
 </div>
