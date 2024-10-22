@@ -8,9 +8,14 @@
     @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 <body>
-    {{-- Add Component "nav" --}}
-    <x-nav />
+    {{-- Add component "nav" --}}
+    <x-nav>
+    {{--  Add component "link", ruta, nombre --}}
+        <x-link redirect="{{ route('cursos') }}">Cursos</x-link>
+        <x-link redirect="{{ route('cursos') }}">Papelera Cursos</x-link>
+    </x-nav>
 
     {{ $slot }}
 </body>
+
 </html>
