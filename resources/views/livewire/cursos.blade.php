@@ -6,9 +6,22 @@
         <h1 class="text-2xl font-bold mb-4">Listado de Cursos</h1>
         {{-- Table --}}
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <button wire:navigate href="{{ route('curso.create') }}" type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Agregar Curso</button>
+            <button wire:navigate href="{{ route('curso.create') }}" type="button"
+                class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Agregar
+                Curso</button>
+
+            {{-- Alert --}}
+            @if ($response = Session::get('success'))
+                <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                    role="alert">
+                    <span class="font-medium">Alerta!</span> {{ $response }}
+                </div>
+            @endif
+
+
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-white uppercase bg-red-600 hover:bg-red-700 dark:bg-gray-700 dark:text-gray-400">
+                <thead
+                    class="text-xs text-white uppercase bg-red-600 hover:bg-red-700 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             #

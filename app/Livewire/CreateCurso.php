@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Livewire\Forms\saveCurso;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class CreateCurso extends Component
@@ -18,6 +19,9 @@ class CreateCurso extends Component
     public function save()
     {
         $this->curso->store();
-        $this->dispatch('savecurso');
+        // $this->dispatch('savecurso');
+        Session::flash('success', 'El curso ha sido guardado correctamente');
+
+        $this->redirect('cursos', true);
     }
 }
