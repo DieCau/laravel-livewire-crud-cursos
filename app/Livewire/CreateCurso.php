@@ -22,6 +22,6 @@ class CreateCurso extends Component
         // $this->dispatch('savecurso');
         Session::flash('success', 'El curso ha sido guardado correctamente');
 
-        $this->redirect('cursos', true);
+        $this->redirect('/cursos', true);
     }
 }

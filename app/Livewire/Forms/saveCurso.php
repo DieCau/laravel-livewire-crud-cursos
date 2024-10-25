@@ -20,9 +20,9 @@ class saveCurso extends Form
     {
         $this->validate();
         Curso::create([
-            'name' => $this->name_curso,
-            'description' => $this->description_curso,
-            'price' => $this->price_curso
+            'name_curso' => $this->name_curso,
+            'description_curso' => $this->description_curso,
+            'price_curso' => $this->price_curso
         ]);
     }
 

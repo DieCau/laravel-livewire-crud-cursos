@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Curso extends Model
 {
-    protected $primaryKey = 'id_curso';
-    protected $fillable = ['name_curso', 'description_curso', 'price_curso'];
     use HasFactory, SoftDeletes;
+    protected $primaryKey = 'id_curso';
+    protected $fillable = [
+        'name_curso',
+        'description_curso',
+        'price_curso'
+    ];
 }
