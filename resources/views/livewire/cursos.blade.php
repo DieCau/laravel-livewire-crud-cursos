@@ -62,7 +62,8 @@
                             <button type="button" wire:navigate href="{{ route('curso.edit', $curso) }}"
                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</button>
 
-                            <button type="button" class="focus:outline-none text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900" wire:click="confirmDelete()">Eliminar</button>
+                            <button type="button" class="focus:outline-none text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900"
+                            wire:click="confirmDelete('{{ $curso->id_curso }}', '{{ $curso->name_curso }}')">Eliminar</button>
                         </td>
                     </tr>
                     @empty
@@ -72,4 +73,25 @@
         </div>
     </div>
 </div>
+
+@script
+<script>
+    $wire.on('confirmDelete', function(message, name_curso) {
+        Swal.fire({
+            title: message,
+            text: "No podras revertir los cambios!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Eliminar!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $wire.dispatch('delete');
+            }
+        })
+    })
+</script>
+@endscript
 
