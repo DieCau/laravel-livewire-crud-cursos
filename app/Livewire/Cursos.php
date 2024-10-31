@@ -3,12 +3,14 @@
 namespace App\Livewire;
 
 use App\Models\Curso;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Cursos extends Component
 {
     public $cursos;
     public $IdCurso;
+    #[On('borrado')]
     public function mount()
     {
         $this->showCurso();
@@ -28,6 +30,18 @@ class Cursos extends Component
     public function confirmDelete($id, $cursoName)
     {
         $this->IdCurso = $id;
-        $this->emit('confirmDelete', 'Seguro de eliminar el curso ' . $cursoName . '?');
+        $this->dispatch('confirmDelete', 'Estas seguro de eliminar el curso ' . $cursoName . '?');
+    }
+
+    // Realizar el proceso de eliminado
+    #[On('delete')]
+    Public function deleteCurso()
+    {
+        $curso = Curso::find($this->IdCurso);
+
+        $curso->delete();
+
+        $this->reset("IdCurso");
+        $this->dispatch('borrado', 'Curso eliminado correctamente!');
     }
 }

@@ -92,6 +92,17 @@
             }
         })
     })
+
+    $wire.on('borrado', function(message) {
+        Swal.fire(
+            {
+                icon: 'success',
+                title: 'Mensaje del sistema',
+                text: message,
+                timer: 1500
+            }
+        )
+    })
 </script>
 @endscript
 
