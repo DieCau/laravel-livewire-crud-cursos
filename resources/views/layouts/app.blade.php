@@ -12,7 +12,7 @@
     <x-nav>
     {{--  Add component "link", ruta, nombre --}}
         <x-link redirect="{{ route('cursos') }}">Cursos</x-link>
-        <x-link redirect="{{ route('cursos') }}">Papelera Cursos</x-link>
+        <x-link redirect="{{ route('curso.bin') }}">Papelera Cursos</x-link>
     </x-nav>
 
     {{ $slot }}
