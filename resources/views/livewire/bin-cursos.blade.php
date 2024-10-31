@@ -3,9 +3,10 @@
     <div
         class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
 
-        <div class="max-w-screen-xl flex flex-wrap items-center mx-auto p-4">
+        <div class="max-w-screen-xl flex flex-wrap items-center mx-0 p-4">
             <h1 class="text-2xl font-bold mr-3">Cursos en Papelera</h1>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTl39sh7x7PRv9MBvcuwdy230ry-le9L8HMg&s" class="h-10" alt="trash">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTl39sh7x7PRv9MBvcuwdy230ry-le9L8HMg&s"
+                class="h-10" alt="trash">
         </div>
 
         {{-- Table --}}
@@ -51,12 +52,14 @@
                                 {{ $curso->price_curso }}
                             </td>
                             <td class="px-6 py-4">
+
                                 <button type="button" wire:navigate href="{{ route('curso.edit', $curso) }}"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Activar</button>
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                                    wire:click="confirmDelete('{{ $curso->id_curso }}', '{{ $curso->name_curso }}')">Activar</button>
 
                                 <button type="button"
-                                    class="focus:outline-none text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900"
-                                    wire:click="confirmDelete('{{ $curso->id_curso }}', '{{ $curso->name_curso }}')">Borrar</button>
+                                    class="focus:outline-none text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2 mb-2 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900"
+                                    wire:click="confirmDel('{{ $curso->id_curso }}', '{{ $curso->name_curso }}')">Borrar</button>
                             </td>
                         </tr>
 
@@ -68,3 +71,35 @@
         </div>
     </div>
 </div>
+
+@script
+<script>
+    $wire.on('confirm-Delete', function(message, name_curso) {
+        Swal.fire({
+            title: message,
+            text: "No podras revertir los cambios!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Eliminar!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $wire.dispatch('ok-delete');
+            }
+        })
+    })
+
+    $wire.on('success-delete', function(message) {
+        Swal.fire(
+            {
+                icon: 'success',
+                title: 'Mensaje del sistema',
+                text: message,
+                timer: 1500
+            }
+        )
+    })
+</script>
+@endscript
