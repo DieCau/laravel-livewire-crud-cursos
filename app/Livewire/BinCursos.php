@@ -25,7 +25,7 @@ class BinCursos extends Component
     public function confirmDel($id, $cursoName)
     {
         $this->CursoId = $id;
-        $this->dispatch('confirm-Delete','Estas seguro de eliminar el curso ' . $cursoName . '?');
+        $this->dispatch('confirm-Delete','Estas seguro de eliminar el curso ' . $cursoName . ' de manera definitiva?');
     }
 
     // Metodo de eliminar el curso de la BD
@@ -39,6 +39,20 @@ class BinCursos extends Component
         $this->reset("CursoId");
 
         $this->dispatch('success-delete', 'Curso eliminado correctamente!');
+
+        $this->showCursosBin();
+    }
+
+    // Metodo para activar el registro del curso
+    public function restore($id)
+    {
+        // consultar al curso con el id
+        $curso = Curso::onlyTrashed()->find($id);
+
+        // restaurar el curso
+        $curso->restore();
+
+        $this->dispatch('activated', 'Curso disponible nuevamentamente!');
 
         $this->showCursosBin();
     }

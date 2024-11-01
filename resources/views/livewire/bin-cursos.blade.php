@@ -53,9 +53,9 @@
                             </td>
                             <td class="px-6 py-4">
 
-                                <button type="button" wire:navigate href="{{ route('curso.edit', $curso) }}"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                                    wire:click="confirmDelete('{{ $curso->id_curso }}', '{{ $curso->name_curso }}')">Activar</button>
+                                <button type="button"
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                                    wire:click="restore('{{ $curso->id_curso }}')">Restaurar</button>
 
                                 <button type="button"
                                     class="focus:outline-none text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2 mb-2 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900"
@@ -64,6 +64,9 @@
                         </tr>
 
                     @empty
+                        <td colspan="5" class="px-6 py-4 text-center font-bold"><span class="text-red-500">
+                            NO HAY CURSOS EN PAPELERA PARA MOSTRAR</span>
+                        </td>
                     @endforelse
 
                 </tbody>
@@ -73,33 +76,40 @@
 </div>
 
 @script
-<script>
-    $wire.on('confirm-Delete', function(message, name_curso) {
-        Swal.fire({
-            title: message,
-            text: "No podras revertir los cambios!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, Eliminar!',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $wire.dispatch('ok-delete');
-            }
+    <script>
+        $wire.on('confirm-Delete', function(message, name_curso) {
+            Swal.fire({
+                title: message,
+                text: "No podras revertir los cambios!",
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonColor: '#3085d6',
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Si, Eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $wire.dispatch('ok-delete');
+                }
+            })
         })
-    })
 
-    $wire.on('success-delete', function(message) {
-        Swal.fire(
-            {
+        $wire.on('success-delete', function(message) {
+            Swal.fire({
                 icon: 'success',
                 title: 'Mensaje del sistema',
                 text: message,
                 timer: 1500
-            }
-        )
-    })
-</script>
+            })
+        })
+
+        $wire.on('activated', function(message) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Mensaje del sistema',
+                text: message,
+                timer: 1500
+            })
+        })
+    </script>
 @endscript

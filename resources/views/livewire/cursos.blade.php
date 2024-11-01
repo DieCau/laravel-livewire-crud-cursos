@@ -16,8 +16,10 @@
                     role="alert">
                     <span class="font-medium">Atención!</span> {{ $response }}
                 </div>
+                </div>
             @endif
 
+            <input type="text" class="px-2 py-3 border-spacing-2 border-gray-500 rounded-md mb-3 w-full" wire:model="search" wire:keydown="showCurso" placeholder="Buscar curso..." wire:model="search">
 
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead
@@ -59,8 +61,8 @@
                             {{ $curso->price_curso }}
                         </td>
                         <td class="px-6 py-4">
-                            <button type="button" wire:navigate href="{{ route('curso.edit', $curso) }}"
-                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</button>
+
+                            <button type="button" wire:navigate href="{{ route('curso.edit', $curso) }}" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 mb-2 dark:focus:ring-yellow-900">Editar</button>
 
                             <button type="button" class="focus:outline-none text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 mb-2 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900"
                             wire:click="confirmDelete('{{ $curso->id_curso }}', '{{ $curso->name_curso }}')">Eliminar</button>
