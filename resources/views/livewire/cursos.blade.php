@@ -1,3 +1,4 @@
+{{-- Vista donde se muestran todos los cursos --}}
 <div class="px-3 py-4">
 
     <div

@@ -1,3 +1,4 @@
+{{-- Vista donde se crea un nuevo curso --}}
 <div class="px-6 py-6">
 
     <div class="grid gap-6 mb-6 md:grid-cols-2">
